@@ -1,37 +1,53 @@
 <template>
   <div>
-    <p>{{ reverseMessage }}</p>
-    <p>{{ reverseMessage }}</p>
-    <p>{{ reverseMessage }}</p>
-    <p>{{ getMessage() }}</p>
-    <p>{{ getMessage() }}</p>
-    <p>{{ getMessage() }}</p>
+    <span>全选:</span>
+    <!-- 4. v-model 关联全选 - 选中状态 -->
+    <input type="checkbox" v-model="isAll"/>
+    <button>反选</button>
+    <ul>
+      <li v-for="(obj, index) in arr" :key="index">
+        <!-- 3. 对象.c - 关联 选中状态 -->
+        <input type="checkbox" v-model="obj.c"/>
+        <span>{{ obj.name }}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+// 目标: 小选框 -> 全选
+// 1. 标签+样式+js准备好
+// 2. 把数据循环展示到页面上
 export default {
-  data(){
+  data() {
     return {
-      msg: "Hello, Vue"
-    }
+      arr: [
+        {
+          name: "猪八戒",
+          c: false,
+        },
+        {
+          name: "孙悟空",
+          c: false,
+        },
+        {
+          name: "唐僧",
+          c: false,
+        },
+        {
+          name: "白龙马",
+          c: false,
+        },
+      ],
+    };
   },
-  // 计算属性优势:
-  // 带缓存
-  // 计算属性对应函数执行后, 会把return值缓存起来
-  // 依赖项不变, 多次调用都是从缓存取值
-  // 依赖项值-变化, 函数会"自动"重新执行-并缓存新的值
+  // 5. 计算属性-isAll
   computed: {
-    reverseMessage(){
-      console.log("计算属性执行了");
-      return this.msg.split("").reverse().join("")
-    }
-  },
-  methods: {
-    getMessage(){
-      console.log("函数执行了");
-      return this.msg.split("").reverse().join("")
+    isAll () {
+         // 6. 统计小选框状态 ->  全选状态
+        // every口诀: 查找数组里"不符合"条件, 直接原地返回false
+        return this.arr.every(obj => obj.c === true)
     }
   }
-}
+};
 </script>
