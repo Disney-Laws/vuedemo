@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-01 17:45:37
  * @LastEditors: sj
- * @LastEditTime: 2022-07-02 15:46:53
+ * @LastEditTime: 2022-07-02 15:30:24
 -->
 <template>
   <div id="app">
@@ -70,12 +70,7 @@ export default {
         this.list.forEach((ele) => (ele.c = val))
       },
       get() {
-         let flag = ''
-          if(this.list.length ===0)return flag = false
-       
-         flag = this.list.every((ele) => ele.c == true)
-         return flag
-        
+        return this.list.every((ele) => ele.c == true)
       },
     },
     allCount(){
