@@ -26,14 +26,14 @@
 
             <!-- 如果价格超过100，就有red这个类 -->
             <td :class="{ red: item.price > 100 }">{{ item.price }}</td>
-            <td>{{ item.time | formatDate}}</td>
+            <td>{{ item.time | formatDate }}</td>
             <td><a href="#" @click.prevent="del(item.id)">删除</a></td>
           </tr>
-          <!-- <tr style="background-color: #EEE">
-              <td>统计:</td>
-              <td colspan="2">总价钱为: 0</td>
-              <td colspan="2">平均价: 0</td>
-          </tr> -->
+          <tr style="background-color: #eee">
+            <td>统计:</td>
+            <td colspan="2">总价钱为: {{ allPrice }}</td>
+            <td colspan="2">平均价: {{ avgPrice }}</td>
+          </tr>
         </tbody>
         <!-- 
         <tfoot >
@@ -145,6 +145,16 @@ export default {
       return moment(val).format("YYYY-MM-DD");
     },
   },
+   computed: {
+      allPrice(){
+          // 3. 求总价
+          return this.list.reduce((sum, obj) => sum += obj.price, 0)
+      },
+      avgPrice(){
+          // 4. 求均价 - 保留2位小数
+          return (this.allPrice / this.list.length).toFixed(2)
+      }
+  }
 };
 </script>
 
