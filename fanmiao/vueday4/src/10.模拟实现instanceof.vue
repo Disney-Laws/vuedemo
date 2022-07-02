@@ -25,6 +25,7 @@ console.log(instance_of(Object, Function));
 console.log(instance_of(String, String));
 
 
+
 export default {
 
 }
