@@ -43,8 +43,7 @@ export default {
       },
       get(){
         return this.arr.every(ele => ele.c == true)
-      }
-      
+      }  
     }
   },
   methods:{
