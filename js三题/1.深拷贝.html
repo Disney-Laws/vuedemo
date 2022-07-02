@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        const _completeDeepClone = (target, map = new Map(datas)) => {
+            // 补全代码
+            if(Array.isArray(datas)){
+            const newArr = []
+            datas.forEach((item,index)=>{
+                newArr[index] = deepClone(item)
+            })
+            return newArr
+        }
+        if(typeof datas === 'Object' && datas !== null){
+            const newObj = {}
+            for(const key in datas) {
+                newObj[key] = deepClone(datas[key])
+            }
+            return newObj
+        }
+        return datas
+        }
+    </script>
+</body>
+
+</html>
