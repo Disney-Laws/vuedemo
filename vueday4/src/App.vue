@@ -1,15 +1,7 @@
 <template>
   <div>
-    <!-- 无id时, 可以使用index(反正也是就地更新) -->
-    <div
-      v-for="(item, index) in arr"
-      style="display: inline-block"
-      :key="index"
-    >
-      <input type="checkbox" v-model="checkNumArr" :value="item" />
-      <span>{{ item }}</span>
-    </div>
-    <p>你选中的元素, 累加的值和为: {{ theSum }}</p>
+    <p>国内网站：粉丝数量：{{ sum | toUp("万") }}</p>
+    <p>外国网站：粉丝数量: {{ sum | toUp("千") }}</p>
   </div>
 </template>
 
@@ -17,19 +9,20 @@
 export default {
   data() {
     return {
-      arr: [9, 15, 19, 25, 29, 31, 48, 57, 62, 79, 87],
-      checkNumArr: [], //  保存用户选中的数字
+      sum: "1876986",
     };
   },
-  computed: {
-    theSum() {
-      return this.checkNumArr.reduce((sum, val) => {
-        return (sum += val);
-      }, 0);
+  filters: {
+    toUp(sum, val) {
+      if (val == "万") {
+        return sum.slice(0, 3) + "," + sum.slice(-4) + "万";
+      }
+      if (val == "千") {
+        return sum.slice(0, 4) + "," + sum.slice(-3) + "千";
+      }
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
