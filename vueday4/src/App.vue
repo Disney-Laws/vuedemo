@@ -1,28 +1,39 @@
+<!--局部过滤器-->
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <p>原来的样子: {{ msg }}</p>
+    <!-- 2. 过滤器使用
+      语法: {{ 值 | 过滤器名字 }}
+     -->
+    <p>使用翻转过滤器: {{ msg | reverse }}</p>
+    <p :title="msg | toUp">鼠标长停</p>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return {
+      msg: 'Hello, Vue'
+    }
+  },
+  // 方式2: 局部 - 过滤器
+  // 只能在当前vue文件内使用
+  /*
+     语法: 
+     filters: {
+       过滤器名字 (val) {
+         return 处理后的值
+       }
+     }
+  */
+  filters: {
+    toUp (val) {
+      return val.toUpperCase()
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
