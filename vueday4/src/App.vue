@@ -1,43 +1,25 @@
-<!--局部过滤器-->
 <template>
   <div>
-    <p>原来的样子: {{ msg }}</p>
-    <!-- 2. 过滤器使用
-      语法: {{ 值 | 过滤器名字 }}
-     -->
-    <p>使用翻转过滤器: {{ msg |  reverse('-') | toUp }}</p>
-    <p :title="msg | toUp">鼠标长停</p>
+    购物车商品总价：
+    <!-- 商品是否大于500 符合条件可使用400的优惠券 否则不可使用 -->
+    {{ totalPrice() }}
   </div>
 </template>
+
 <script>
 export default {
-  data(){
+  data () {
     return {
-      msg: 'Hello, Vue'
+      total: 5,
+      price: 98,
+      coupon: 400
     }
   },
-  // 方式2: 局部 - 过滤器
-  // 只能在当前vue文件内使用
-  /*
-     语法: 
-     filters: {
-       过滤器名字 (val) {
-         return 处理后的值
-       }
-     }
-  */
-  filters: {
-    toUp (val) {
-      return val.toUpperCase()
-    },
-     reverse(val, split) {
-      return val.split('').reverse().join(split);
+
+  methods: {
+    totalPrice () {
+      return this.total * this.price >= 500 ? this.total * this.price - this.coupon : this.total * this.price
     }
-    
   }
 }
 </script>
-
-<style>
-
-</style>
