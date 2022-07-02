@@ -1,33 +1,37 @@
 <template>
   <div>
-    购物车商品总价：
-    <!-- 商品是否大于500 符合条件可使用400的优惠券 否则不可使用 -->
-    {{ totalPrice() }}
-    {{ totalPrice() }}
-    {{ totalPrice() }}
-    {{ totalPrice() }}
-    {{ totalPrice() }}
-    {{ totalPrice() }}
-    {{ totalPrice() }}
+    <p>{{ reverseMessage }}</p>
+    <p>{{ reverseMessage }}</p>
+    <p>{{ reverseMessage }}</p>
+    <p>{{ getMessage() }}</p>
+    <p>{{ getMessage() }}</p>
+    <p>{{ getMessage() }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
+  data(){
     return {
-      total: 5,
-      price: 98,
-      coupon: 400,
-    };
+      msg: "Hello, Vue"
+    }
   },
-
+  // 计算属性优势:
+  // 带缓存
+  // 计算属性对应函数执行后, 会把return值缓存起来
+  // 依赖项不变, 多次调用都是从缓存取值
+  // 依赖项值-变化, 函数会"自动"重新执行-并缓存新的值
+  computed: {
+    reverseMessage(){
+      console.log("计算属性执行了");
+      return this.msg.split("").reverse().join("")
+    }
+  },
   methods: {
-    totalPrice() {
-      return this.total * this.price >= 500
-        ? this.total * this.price - this.coupon
-        : this.total * this.price;
-    },
-  },
-};
+    getMessage(){
+      console.log("函数执行了");
+      return this.msg.split("").reverse().join("")
+    }
+  }
+}
 </script>
