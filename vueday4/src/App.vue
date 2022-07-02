@@ -92,12 +92,13 @@ import moment from "moment";
 export default {
   data() {
     return {
-      list: [
-        { id: 100, price: 199, time: new Date("2010-08-12") },
-        { id: 101, name: "裤子", price: 34, time: new Date("2013-09-01") },
-        { id: 102, name: "鞋", price: 25.4, time: new Date("2018-11-22") },
-        { id: 103, name: "头发", price: 19900, time: new Date("2020-12-12") },
-      ],
+      list: JSON.parse(localStorage.getItem("pList")) || [],
+      // [
+      //   { id: 100, price: 199, time: new Date("2010-08-12") },
+      //   { id: 101, name: "裤子", price: 34, time: new Date("2013-09-01") },
+      //   { id: 102, name: "鞋", price: 25.4, time: new Date("2018-11-22") },
+      //   { id: 103, name: "头发", price: 19900, time: new Date("2020-12-12") },
+      // ],
       name: "",
       price: 0,
     };
@@ -145,16 +146,25 @@ export default {
       return moment(val).format("YYYY-MM-DD");
     },
   },
-   computed: {
-      allPrice(){
-          // 3. 求总价
-          return this.list.reduce((sum, obj) => sum += obj.price, 0)
+  computed: {
+    allPrice() {
+      // 3. 求总价
+      return this.list.reduce((sum, obj) => (sum += obj.price), 0);
+    },
+    avgPrice() {
+      // 4. 求均价 - 保留2位小数
+      return (this.allPrice / this.list.length).toFixed(2);
+    },
+  },
+  watch: {
+    list: {
+      handler() {
+        // 2. 存入本地
+        localStorage.setItem("pList", JSON.stringify(this.list));
       },
-      avgPrice(){
-          // 4. 求均价 - 保留2位小数
-          return (this.allPrice / this.list.length).toFixed(2)
-      }
-  }
+      deep: true,
+    },
+  },
 };
 </script>
 
