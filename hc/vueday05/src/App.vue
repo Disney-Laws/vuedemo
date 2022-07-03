@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-03 20:00:56
  * @LastEditors: sj
- * @LastEditTime: 2022-07-03 22:25:40
+ * @LastEditTime: 2022-07-03 22:36:03
 -->
 <template>
   <div>
@@ -14,7 +14,7 @@
     :list="list"
     @delete="deleteFn"
     ></TodoMain>
-    <TodoFooter></TodoFooter>
+    <TodoFooter :num="num"></TodoFooter>
   </div>
 </template>
 
@@ -41,6 +41,11 @@ export default {
     deleteFn(id){
      const index = this.list.findIndex(ele=>ele.id == id);
      this.list.splice(index, 1);
+    }
+  },
+  computed:{
+    num(){
+     return this.list.filter(ele=>!ele.isDone).length
     }
   }
 }
