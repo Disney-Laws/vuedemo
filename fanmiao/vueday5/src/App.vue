@@ -3,7 +3,7 @@
     <!-- 除了驼峰, 还可以使用-转换链接 -->
     <TodoHeader @add="addFn"></TodoHeader>
     <TodoMain :list="showList" @del="delFn"></TodoMain>
-    <TodoFooter :count="count" @change="changeFn"></TodoFooter>
+    <TodoFooter :count="count" @change="changeFn" @clear="clearFn"></TodoFooter>
   </section>
 </template>
 
@@ -48,6 +48,9 @@ export default {
     },
     changeFn(val){
       this.getSel=val
+    },
+    clearFn(){
+      this.list = this.list.filter(ele => !ele.isDone)
     }
   },
   computed:{

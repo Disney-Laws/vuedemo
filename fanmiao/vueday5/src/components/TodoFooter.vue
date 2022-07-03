@@ -12,7 +12,7 @@
                 <a :class="{selected : isSel=='yes'}" href="javascript:;" @click="change('yes')">已完成</a>
             </li>
         </ul>
-        <button class="clear-completed">清除已完成</button>
+        <button class="clear-completed" @click="clear">清除已完成</button>
     </footer>
 </template>
 
@@ -35,6 +35,9 @@ export default {
             this.isSel = val
             this.$emit('change',val)
         },
+        clear(){
+            this.$emit('clear')
+        }
        
     }
    
