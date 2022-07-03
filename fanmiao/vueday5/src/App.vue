@@ -1,7 +1,7 @@
 <template>
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
-    <TodoHeader @add="addFn"></TodoHeader>
+    <TodoHeader @add="addFn" @isALL="isAllFn"></TodoHeader>
     <TodoMain :list="showList" @del="delFn"></TodoMain>
     <TodoFooter :count="count" @change="changeFn" @clear="clearFn"></TodoFooter>
   </section>
@@ -52,6 +52,9 @@ export default {
     },
     clearFn(){
       this.list = this.list.filter(ele => !ele.isDone)
+    },
+    isAllFn(val){
+      this.list.forEach(ele => ele.isDone=val)
     }
   },
   computed:{
