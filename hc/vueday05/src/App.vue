@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-03 20:00:56
  * @LastEditors: sj
- * @LastEditTime: 2022-07-03 23:23:36
+ * @LastEditTime: 2022-07-03 23:26:53
 -->
 <template>
   <div>
@@ -29,11 +29,12 @@ import TodoFooter from './components/TodoFooter.vue'
 export default {
     data() {
     return {
-      list: [
-        { id: 100, name: "吃饭", isDone: true },
-        { id: 101, name: "睡觉", isDone: false },
-        { id: 102, name: "打豆豆", isDone: true },
-      ],
+      // list: [
+      //   { id: 100, name: "吃饭", isDone: true },
+      //   { id: 101, name: "睡觉", isDone: false },
+      //   { id: 102, name: "打豆豆", isDone: true },
+      // ],
+      list: JSON.parse(localStorage.getItem('list'))||[],
       getSel:'all',
     };
   },
@@ -77,6 +78,14 @@ export default {
       }else{
         return this.list
       }
+    }
+  },
+  watch:{
+    list:{
+      handler(val){
+        localStorage.setItem('list',JSON.stringify(val ||[]))
+      },
+      deep:true,
     }
   }
 }
