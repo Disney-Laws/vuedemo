@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-03 21:34:08
  * @LastEditors: sj
- * @LastEditTime: 2022-07-03 22:46:08
+ * @LastEditTime: 2022-07-03 22:57:14
 -->
 <template>
   <footer class="footer">
@@ -21,7 +21,7 @@
         <a :class="{selected: isSel=='yes'}" href="javascript:;" @click="change('yes')">已完成</a>
       </li>
     </ul>
-    <button class="clear-completed" >清除已完成</button>
+    <button class="clear-completed" @click="clear">清除已完成</button>
   </footer>
 </template>
 
@@ -37,6 +37,9 @@ export default {
     change(checked){
       this.isSel=checked
       this.$emit('change',checked)
+    },
+    clear(){
+      this.$emit('clear')
     }
   }
 

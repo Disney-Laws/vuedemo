@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-03 20:00:56
  * @LastEditors: sj
- * @LastEditTime: 2022-07-03 22:54:55
+ * @LastEditTime: 2022-07-03 23:00:10
 -->
 <template>
   <div>
@@ -17,6 +17,7 @@
     <TodoFooter 
     :num="num"
     @change="changeFn"
+    @clear="clearFn"
     ></TodoFooter>
   </div>
 </template>
@@ -48,6 +49,9 @@ export default {
     },
     changeFn(checked){
       this.getSel=checked
+    },
+    clearFn(){
+      this.list.forEach(ele=>ele.isDone=false)
     }
   },
   computed:{
