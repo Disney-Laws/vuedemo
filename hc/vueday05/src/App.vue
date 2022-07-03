@@ -5,16 +5,19 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-03 20:00:56
  * @LastEditors: sj
- * @LastEditTime: 2022-07-03 22:36:03
+ * @LastEditTime: 2022-07-03 22:54:55
 -->
 <template>
   <div>
     <TodoHeader></TodoHeader>
     <TodoMain
-    :list="list"
+    :list="showlist"
     @delete="deleteFn"
     ></TodoMain>
-    <TodoFooter :num="num"></TodoFooter>
+    <TodoFooter 
+    :num="num"
+    @change="changeFn"
+    ></TodoFooter>
   </div>
 </template>
 
@@ -30,6 +33,7 @@ export default {
         { id: 201, name: "睡觉", isDone: false },
         { id: 103, name: "打豆豆", isDone: true },
       ],
+      getSel:'all',
     };
   },
   components:{
@@ -41,11 +45,23 @@ export default {
     deleteFn(id){
      const index = this.list.findIndex(ele=>ele.id == id);
      this.list.splice(index, 1);
+    },
+    changeFn(checked){
+      this.getSel=checked
     }
   },
   computed:{
     num(){
      return this.list.filter(ele=>!ele.isDone).length
+    },
+    showlist(){
+      if(this.getSel=='no'){
+        return this.list.filter(ele=>!ele.isDone)
+      }else if(this.getSel=='yes'){
+        return this.list.filter(ele=>ele.isDone)
+      }else{
+        return this.list
+      }
     }
   }
 }
