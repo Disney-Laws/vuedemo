@@ -5,11 +5,11 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-03 20:00:56
  * @LastEditors: sj
- * @LastEditTime: 2022-07-03 23:00:10
+ * @LastEditTime: 2022-07-03 23:08:37
 -->
 <template>
   <div>
-    <TodoHeader></TodoHeader>
+    <TodoHeader @enter="enterFn"></TodoHeader>
     <TodoMain
     :list="showlist"
     @delete="deleteFn"
@@ -31,8 +31,8 @@ export default {
     return {
       list: [
         { id: 100, name: "吃饭", isDone: true },
-        { id: 201, name: "睡觉", isDone: false },
-        { id: 103, name: "打豆豆", isDone: true },
+        { id: 101, name: "睡觉", isDone: false },
+        { id: 102, name: "打豆豆", isDone: true },
       ],
       getSel:'all',
     };
@@ -52,6 +52,14 @@ export default {
     },
     clearFn(){
       this.list.forEach(ele=>ele.isDone=false)
+    },
+    enterFn(val){
+      const id = this.list[this.list.length-1]?this.list[this.list.length-1].id+1:100
+      this.list.push({
+        id,
+        name:val,
+        isDone: false
+      })
     }
   },
   computed:{
