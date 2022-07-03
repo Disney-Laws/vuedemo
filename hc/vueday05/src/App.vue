@@ -5,11 +5,11 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-03 20:00:56
  * @LastEditors: sj
- * @LastEditTime: 2022-07-03 23:08:37
+ * @LastEditTime: 2022-07-03 23:23:36
 -->
 <template>
   <div>
-    <TodoHeader @enter="enterFn"></TodoHeader>
+    <TodoHeader @enter="enterFn" @checkbox="checkboxFn"></TodoHeader>
     <TodoMain
     :list="showlist"
     @delete="deleteFn"
@@ -60,6 +60,9 @@ export default {
         name:val,
         isDone: false
       })
+    },
+    checkboxFn(val){
+      this.list.forEach(ele=>ele.isDone=val)
     }
   },
   computed:{

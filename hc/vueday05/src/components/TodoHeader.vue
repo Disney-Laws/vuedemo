@@ -5,12 +5,12 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-03 21:33:45
  * @LastEditors: sj
- * @LastEditTime: 2022-07-03 23:09:06
+ * @LastEditTime: 2022-07-03 23:20:28
 -->
 <template>
   <header class="header">
     <h1>todos</h1>
-    <input id="toggle-all" class="toggle-all" type="checkbox" >
+    <input id="toggle-all" class="toggle-all" type="checkbox" v-model="isAll">
     <label for="toggle-all"></label> 
     <!-- label 可以关联一个表单标签 -->
     <input
@@ -34,6 +34,17 @@ export default {
   enter(){
     this.$emit('enter',this.task)
     this.task =''
+  }
+ },
+ computed:{
+  isAll:{
+    get(){
+      return this.$parent.list.every(ele=>ele.isDone)
+    },
+    set(val){
+      this.$emit('checkbox',val)
+      // this.$parent.list.forEach(ele=>ele.isDone=val)
+    }
   }
  }
 }
