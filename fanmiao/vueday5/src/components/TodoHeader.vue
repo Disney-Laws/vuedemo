@@ -4,12 +4,24 @@
         <input id="toggle-all" class="toggle-all" type="checkbox">
         <label for="toggle-all"></label>
         <!-- label 可以关联一个表单标签 -->
-        <input class="new-todo" placeholder="输入任务名称-回车确认" autofocus />
+        <input class="new-todo" placeholder="输入任务名称-回车确认" autofocus @keydown.enter="enter" v-model.trim="task"/>
     </header>
 </template>
 
 <script>
 export default {
+    data(){
+        return{
+            task:''
+        }
+    },
+    methods:{
+        enter(){
+            if(this.task.length==0) return alert('Please enter...')
+            this.$emit('add',this.task)
+            this.task=''
+        }
+    }
 
 }
 </script>

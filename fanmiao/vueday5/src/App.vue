@@ -1,7 +1,7 @@
 <template>
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
-    <TodoHeader></TodoHeader>
+    <TodoHeader @add="addFn"></TodoHeader>
     <TodoMain :list="list"></TodoMain>
     <TodoFooter></TodoFooter>
   </section>
@@ -31,6 +31,16 @@ export default {
         { id: 103, name: "打豆豆", isDone: true },
       ],
     };
+  },
+  methods:{
+    addFn(task){
+      const id = this.list[this.list.length - 1] ? this.list[this.list.length - 1].id+1 : 100
+      this.list.push({
+        id,
+        name:task,
+        isDone:false
+      })
+    }
   }
 };
 </script>
