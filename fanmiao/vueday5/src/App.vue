@@ -2,7 +2,7 @@
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
     <TodoHeader @add="addFn"></TodoHeader>
-    <TodoMain :list="list"></TodoMain>
+    <TodoMain :list="list" @del="delFn"></TodoMain>
     <TodoFooter></TodoFooter>
   </section>
 </template>
@@ -40,6 +40,10 @@ export default {
         name:task,
         isDone:false
       })
+    },
+    delFn(id){
+      const index = this.list.findIndex(ele => ele.id==id)
+      this.list.splice(index,1)
     }
   }
 };
