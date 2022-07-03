@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Father {
+        constructor (name,age){
+            this.name = name,
+            this.age = age
+        }
+    }
+    let son = new Father('ggt',18)
+    // console.log(son instanceof Father);
+    function myInstanceof (obj,className) {
+        let pointer = obj.__proto__
+        while(pointer) {
+            if(pointer == className.prototype) return true
+            pointer = pointer.__proto__
+        }
+        return false
+
+    }
+    console.log(myInstanceof(son,Array));
+</script>
+</html>
