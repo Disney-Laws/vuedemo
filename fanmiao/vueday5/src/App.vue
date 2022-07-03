@@ -25,11 +25,12 @@ export default {
   },
   data() {
     return {
-      list: [
-        { id: 100, name: "吃饭", isDone: true },
-        { id: 201, name: "睡觉", isDone: false },
-        { id: 103, name: "打豆豆", isDone: true },
-      ],
+      // list: [
+      //   { id: 100, name: "吃饭", isDone: true },
+      //   { id: 201, name: "睡觉", isDone: false },
+      //   { id: 103, name: "打豆豆", isDone: true },
+      // ],
+      list:JSON.parse(localStorage.getItem('list'))||[],
       getSel:'all'
     };
   },
@@ -65,6 +66,14 @@ export default {
     },
     count() {
       return this.showList.length
+    }
+  },
+  watch:{
+    list:{
+      deep:true,
+      handler(val){
+        localStorage.setItem('list',JSON.stringify(val||[]))
+      }
     }
   }
 };
