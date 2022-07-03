@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-03 21:33:45
  * @LastEditors: sj
- * @LastEditTime: 2022-07-03 23:20:28
+ * @LastEditTime: 2022-07-04 00:36:54
 -->
 <template>
   <header class="header">
@@ -17,7 +17,7 @@
       class="new-todo"
       placeholder="输入任务名称-回车确认"
       autofocus
-      v-model="task"
+      v-model.trim="task"
       @keydown.enter="enter"
     />
   </header>
@@ -32,6 +32,7 @@ export default {
  },
  methods:{
   enter(){
+     if( this.task.length == 0 ) return alert('please enter')
     this.$emit('enter',this.task)
     this.task =''
   }
