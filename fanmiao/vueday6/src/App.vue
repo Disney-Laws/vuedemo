@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <t-body></t-body>
+        <t-body v-for="item in list" :key="item.id" :list="item"></t-body>
       </tbody>
     </table>
     <!-- 新增图书 -->
@@ -27,10 +27,25 @@
 import findBook from './components/findBook.vue'
 import tBody from './components/tBody.vue'
 export default {
+  data(){
+    return{
+      list:[]
+    }
+  },
   components:{
     findBook,
     tBody,
+  },
+  mounted(){
+    this.$axios({
+      url:'/api/getbooks'
+    }).then(res => {
+      // console.log(res);
+      this.list = res.data.data
+      console.log(this.list);
+    }) 
   }
+
 
 }
 </script>
