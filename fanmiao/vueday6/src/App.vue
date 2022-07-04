@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 搜索-书本名称 -->
-    <find-book></find-book>
+    <find-book @seach="seachFn"></find-book>
     <!-- 图书渲染表格 -->
     <table>
       <thead>
@@ -44,6 +44,11 @@ export default {
       this.list = res.data.data
       console.log(this.list);
     }) 
+  },
+  methods:{
+    seachFn(val){
+      return this.list=val
+    }
   }
 
 

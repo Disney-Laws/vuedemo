@@ -10,7 +10,17 @@ export default {
         }
     },
     methods:{
-
+        seach(){
+            this.$axios({
+                url:'/api/getbooks',
+                params:{
+                    bookname:this.bookname
+                }
+            }).then((res)=> {
+                console.log(res.data);
+                this.$emit('seach',res.data.data)
+            })
+        }
     }
 
 }
