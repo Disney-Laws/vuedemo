@@ -14,7 +14,11 @@
         </tr>
       </thead>
       <tbody>
-        <t-body v-for="item in list" :key="item.id" :list="item"></t-body>
+        <t-body v-for="item in list" 
+        :key="item.id" 
+        :list="item"
+        @del="delFn"
+        ></t-body>
       </tbody>
     </table>
     <!-- 新增图书 -->
@@ -60,6 +64,18 @@ export default {
       data:{
         appkey:'7250d3eb-18e1-41bc-8bb2-11483665535a',
         ...obj
+      }
+    }).then(res => {
+      console.log(res);
+      // console.log(this.list);
+    }) 
+    },
+    delFn(id){
+      this.$axios({
+      url:'/api/delbook',
+      method:'GET',
+      params:{
+        id,
       }
     }).then(res => {
       console.log(res);
