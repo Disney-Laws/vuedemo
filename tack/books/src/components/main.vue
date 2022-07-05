@@ -27,13 +27,17 @@ export default {
       this.$axios({
         url: '/api/delbook',
         method: 'GET',
-         params: {
-            id: val
-        }
+        params: {
+          id: val,
+        },
       }).then((res) => {
         console.log(res)
-        alert('删除成功')
-        location.reload()
+        if (res.data.status == 200) {
+          alert(res.data.msg)
+          location.reload()
+        }else{
+          alert('删除失败')
+        }
       })
     },
     details(val) {

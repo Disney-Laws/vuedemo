@@ -64,10 +64,12 @@ export default {
           ...this.obj,
         },
       }).then((res) => {
-        if (res.status == 200) {
+        if (res.data.status == 201) {
           alert(res.data.msg)
+          location.reload()
+        } else {
+          alert('添加失败')
         }
-        location.reload()
       })
       this.obj.bookname = ''
       this.obj.author = ''
