@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    <button @click="closeBtn">关闭</button>
+    <button class="closeBtn" @click="closeBtn">关闭</button>
     <table>
       <tr>
         <td>图书ID:</td>
@@ -36,4 +36,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.closeBtn{
+    border: 0;
+    
+}
+
+</style>>
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <input type="text" placeholder="搜索-图书名称" @keydown.enter="seach" v-model.trim="bookname">
+  <input type="text" placeholder="搜索-图书名称" @keydown.enter="seach" v-model.trim="bookname" />
 </template>
 
 <script>
@@ -31,6 +31,25 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+input{
+    position: relative;
+    font-size: 14px;
+    display: inline-block;
+    width: 300px;
+
+    -webkit-appearance: none;
+    background-color: #FFF;
+    border-radius: 4px;
+    border: 1px solid #DCDFE6;
+    box-sizing: border-box;
+    color: #606266;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+}
+</style>>
 
 </style>

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <input type="text" placeholder="书本" v-model="bookname" />
+    <el-input type="text" placeholder="书本" v-model.trim="bookname" />
     <br />
     <br />
-    <input type="text" placeholder="作者" v-model="author" />
+    <el-input type="text" placeholder="作者" v-model.trim="author" />
     <br />
     <br />
-    <input type="text" placeholder="出版社" v-model="publisher" />
+    <el-input type="text" placeholder="出版社" v-model.trim="publisher" />
     <br />
     <br />
-    <button id="addBtn" @click="addFn">新增</button>
+    <el-button id="addBtn" @click="addFn" :disabled="isShow">新增</el-button>
   </div>
 </template>
 
@@ -20,11 +20,15 @@ export default {
       bookname: '',
       author: '',
       publisher: '',
+      isShow:false,
     };
   },
   methods: {
     addFn() {
-        document.getElementById('addBtn').disabled=true
+      if (this.bookname=='' || this.author=='' || this.publisher=='') {
+        return alert('Pleace enter...')
+      }
+      this.isShow=true
       const obj = {
         bookname: this.bookname,
         author: this.author,
@@ -34,7 +38,7 @@ export default {
       this.bookname='',
       this.author='',
       this.publisher=''
-      document.getElementById('addBtn').disabled=false
+      // document.getElementById('addBtn').disabled=false
     },
   },
 };

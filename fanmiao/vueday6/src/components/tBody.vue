@@ -8,11 +8,16 @@
           <button @click="del(list.id)">删除</button>  
           <button @click="about(list)">详情</button>
           </td>
+          
   </tr>
 </template>
 
 <script>
 export default {
+  data(){
+    return{
+    }
+  },
     props:['list'],
     methods:{
       del(id){

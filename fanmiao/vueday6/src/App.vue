@@ -2,8 +2,9 @@
   <div id="app">
     <!-- 搜索-书本名称 -->
     <find-book @seach="seachFn"></find-book>
+    <br><br>
     <!-- 图书渲染表格 -->
-    <table class="books">
+    <!-- <table class="books">
       <thead>
         <tr>
           <td>序号</td>
@@ -22,15 +23,15 @@
           @about="aboutFn"
         ></t-body>
       </tbody>
-    </table>
-
+    </table> -->
+    <el-table :list="list" @del="delFn" @about="aboutFn"></el-table>
+    <br><br>
     <!-- 新增图书 -->
     <add-book @add="addBookFn"></add-book>
     <!-- 图书详情 -->
-    <div class="mask" v-if="isShow" >
+    <div class="mask" v-if="isShow">
       <detail-book :book="detail" @closeDetail="closeDetailFn"></detail-book>
     </div>
-
   </div>
 </template>
 
@@ -40,12 +41,14 @@ import tBody from './components/tBody.vue';
 import addBook from './components/addBook.vue';
 import detailBook from './components/detailBook.vue';
 import DetailBook from './components/detailBook.vue';
+import elTable from './components/elTable.vue';
+import ElTable from './components/elTable.vue';
 export default {
   data() {
     return {
       list: [],
-      detail:{},
-      isShow:false,
+      detail: {},
+      isShow: false,
     };
   },
   components: {
@@ -53,8 +56,10 @@ export default {
     tBody,
     addBook,
     detailBook,
-    DetailBook
-},
+    DetailBook,
+    elTable,
+    ElTable,
+  },
   mounted() {
     this.$axios({
       url: '/api/getbooks',
@@ -79,9 +84,15 @@ export default {
       }).then((res) => {
         console.log(res);
         // console.log(this.list);
+        if (res.status !== 200) {
+          return alert('添加失败！');
+        }
+        alert('添加成功！');
+        location.reload(true);
       });
     },
     delFn(id) {
+      // console.log(id);
       this.$axios({
         url: '/api/delbook',
         method: 'GET',
@@ -91,15 +102,20 @@ export default {
       }).then((res) => {
         console.log(res);
         // console.log(this.list);
+        if (res.data.status !== 200) {
+          return alert('删除失败！');
+        }
+        alert('删除成功！');
+        location.reload(true);
       });
     },
-    aboutFn(list){
-      this.detail=list
-      this.isShow=true
+    aboutFn(list) {
+      this.detail = list;
+      this.isShow = true;
     },
-    closeDetailFn(val){
-      this.isShow=val
-    }
+    closeDetailFn(val) {
+      this.isShow = val;
+    },
   },
 };
 </script>
