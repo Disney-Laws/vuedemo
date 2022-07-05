@@ -1,67 +1,69 @@
 <template>
-  <table>
-  <thead>
-      <tr>
-      <th>序号</th>
-      <th>书名</th>
-      <th>作者</th>
-      <th>出版社</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="item in bookList" :key="item.id">
-      <td>{{item.id}}</td>
-      <td>{{item.bookname}}</td>
-      <td>{{item.author}}</td>
-      <td>{{item.publisher}}</td>
-      <td><a href="javascript:;" @click.prevent="del(item.id)">删除</a>&nbsp; 
-      <a href="javascript:;" @click="more(item)">详情</a></td>
-    </tr>
-  </tbody>
-  </table>
+  <div>
+    <h3>添加图书</h3>
+    <input type="text" placeholder="书名" v-model.trim="book.bookname">
+    <br>
+    <input type="text" placeholder="作者" v-model.trim="book.author">
+    <br>
+    <input type="text" placeholder="出版社" v-model.trim="book.publisher">
+    <br>
+    <button @click="addFn()" ref="addBtn">添加</button>
+  </div>
 </template>
 
 <script>
 export default {
-  props:{
-    bookList:{
-      type:Array,
-      default:()=>{}
+  data(){
+    return {
+      book:{
+        bookname:'',
+        author:'',
+        publisher:'',
+      }
     }
   },
   methods:{
-    del(id){
+    addFn(){
+     
+      if(this.book.author==''||this.book.bookname==''||this.book.publisher=='') return alert('Please enter')
+       this.$refs.addBtn.disabled=true
       this.$axios({
-        url:'/api/delbook',
-        params:{
-          id,
-        }
+        url:'/api/addbook',
+        method: 'POST',
+        data: this.book
       }).then(res=>{
         console.log(res);
-        if(res.data.status !=200)return alert('删除图书失败')
-         alert(res.data.msg)
-         this.$emit('delBook',id)
-      })
-     
-    },
-    more(info){
-      alert(`书名:${info.bookname}\n作者:${info.author}\n出版社:${info.publisher}`)
+          if(res.data.status !=201)return alert('添加图书失败')
+        alert(res.data.msg)  
+        this.$nextTick(()=> this.$parent.getBookList())  
+           this.$refs.addBtn.disabled=false       
+      })     
+      this.book={
+        bookname:'',
+        author:'',
+        publisher:'',
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-table {
-  float: left;
-  border-collapse: collapse;
+ input {
+   width: 200px;
+   height: 35px;
+   margin-bottom: 15px;
+ }
+ div {
+  float: right;
+  margin-right: 50px;
   text-align: center;
-}
- th,
- td {
-  width: 150px;
-  height: 30px;
+  width: 300px;
+  height: 300px;
   border: 1px solid #000;
+ }
+ button{
+  width: 50px;
+  height: 40px;
  }
 </style>

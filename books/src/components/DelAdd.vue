@@ -1,39 +1,67 @@
 <template>
-  <div>
-    <input type="text" placeholder="请输入书名" v-model.trim="name" @keydown.enter="enter">
-    <button @click="comeback" v-show="isShow">返回全部列表</button>
-  </div>
+  <table>
+  <thead>
+      <tr>
+      <th>序号</th>
+      <th>书名</th>
+      <th>作者</th>
+      <th>出版社</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="item in bookList" :key="item.id">
+      <td>{{item.id}}</td>
+      <td>{{item.bookname}}</td>
+      <td>{{item.author}}</td>
+      <td>{{item.publisher}}</td>
+      <td><a href="javascript:;" @click.prevent="del(item.id)">删除</a>&nbsp; 
+      <a href="javascript:;" @click="more(item)">详情</a></td>
+    </tr>
+  </tbody>
+  </table>
 </template>
 
 <script>
 export default {
- data(){
-  return {
-    name:'',
-    isShow: false
-  }
- },
- props:['bookList'],
- methods:{
-  enter(){
-      if(this.name.length==0) return alert("Please enter")
-       const newList= this.bookList.filter(ele=>ele.bookname==this.name) 
-       if(newList.length==0)return alert('没有找到对应的图书') 
-       this.$parent.bookList = newList 
-       this.name='' 
-       this.isShow =true
+  props:{
+    bookList:{
+      type:Array,
+      default:()=>{}
+    }
   },
-  comeback(){
-    this.$parent.getBookList()
-    this.isShow =false
+  methods:{
+    del(id){
+      this.$axios({
+        url:'/api/delbook',
+        params:{
+          id,
+        }
+      }).then(res=>{
+        console.log(res);
+        if(res.data.status !=200)return alert('删除图书失败')
+         alert(res.data.msg)
+         this.$emit('delBook',id)
+      })
+     
+    },
+    more(info){
+      alert(`书名:${info.bookname}\n作者:${info.author}\n出版社:${info.publisher}`)
+    }
   }
- }
 }
 </script>
 
 <style scoped>
- input {
-  width: 300px;
+table {
+  float: left;
+  border-collapse: collapse;
+  text-align: center;
+}
+ th,
+ td {
+  width: 150px;
   height: 30px;
+  border: 1px solid #000;
  }
 </style>

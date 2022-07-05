@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <GetAdd :bookList="bookList"></GetAdd>
-    <PostAdd :bookList="bookList" @delBook="delBookFn"></PostAdd>
-    <DelAdd></DelAdd>
+    <DelAdd :bookList="bookList" @delBook="delBookFn"></DelAdd>
+    <PostAdd></PostAdd>
   </div>
 </template>
 
 <script>
-import GetAdd from "./components/GetAdd.vue";
+import GetAdd from "./components/Add.vue";
 import PostAdd from "./components/PostAdd.vue";
 import DelAdd from "./components/DelAdd.vue";
 
