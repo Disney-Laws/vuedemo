@@ -4,20 +4,14 @@
           <td>{{list.bookname}}</td>
           <td>{{list.author}}</td>
           <td>{{list.publisher}}</td>
-          <td><button>删除</button> <button>编辑</button></td>
+          <td><button>删除</button> <button>详情</button></td>
   </tr>
 </template>
 
 <script>
 export default {
-    props:{
-        list:{
-            type:Object(),
-            default:() => ({})
-        }
-    }
-
-
+    props:['list']
+    
 }
 </script>
 

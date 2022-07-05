@@ -18,7 +18,9 @@
       </tbody>
     </table>
     <!-- 新增图书 -->
-    <div></div>
+    <div>
+      <add-book @add="addBookFn"></add-book>
+    </div>
 
   </div>
 </template>
@@ -26,6 +28,7 @@
 <script>
 import findBook from './components/findBook.vue'
 import tBody from './components/tBody.vue'
+import addBook from './components/addBook.vue'
 export default {
   data(){
     return{
@@ -35,6 +38,7 @@ export default {
   components:{
     findBook,
     tBody,
+    addBook,
   },
   mounted(){
     this.$axios({
@@ -42,12 +46,25 @@ export default {
     }).then(res => {
       // console.log(res);
       this.list = res.data.data
-      console.log(this.list);
+      // console.log(this.list);
     }) 
   },
   methods:{
     seachFn(val){
       return this.list=val
+    },
+    addBookFn(obj){
+      this.$axios({
+      url:'/api/addbook',
+      method:'POST',
+      data:{
+        appkey:'7250d3eb-18e1-41bc-8bb2-11483665535a',
+        ...obj
+      }
+    }).then(res => {
+      console.log(res);
+      // console.log(this.list);
+    }) 
     }
   }
 
