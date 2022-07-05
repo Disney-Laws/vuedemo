@@ -1,33 +1,39 @@
 <template>
-  <div class="detailBook">
-   <table>
-    <tr>
+  <div class="detail">
+    <button @click="closeBtn">关闭</button>
+    <table>
+      <tr>
         <td>图书ID:</td>
-        <td>{{book.id}}</td>
-    </tr>
-    <tr>
+        <td>{{ book.id }}</td>
+      </tr>
+      <tr>
         <td>书名:</td>
-        <td>{{book.bookname}}</td>
-    </tr>
-    <tr>
+        <td>{{ book.bookname }}</td>
+      </tr>
+      <tr>
         <td>作者:</td>
-        <td>{{book.author}}</td>
-    </tr>
-    <tr>
+        <td>{{ book.author }}</td>
+      </tr>
+      <tr>
         <td>出版商:</td>
-        <td>{{book.publisher}}</td>
-    </tr>
-   </table>
-    
+        <td>{{ book.publisher }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
 <script>
 export default {
-    props:['book']
-}
+  props: ['book'],
+  data() {
+    return {};
+  },
+  methods: {
+    closeBtn() {
+      this.$emit('closeDetail', false);
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

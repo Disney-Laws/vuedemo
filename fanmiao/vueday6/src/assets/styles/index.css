@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: auto;
+}
+
+#app {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    min-height: 900px;
+}
+
+/* 遮罩层 */
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+}
+.mask .detail{
+    position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: aliceblue;
+        width: 300px;
+        height: 200px;
+        text-align: right;
+}
+.mask .detail button{
+    background-color: red;
+    border: 0px;
+}
+.mask .detail table{
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+}

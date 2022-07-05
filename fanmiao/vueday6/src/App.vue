@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <!-- 搜索-书本名称 -->
     <find-book @seach="seachFn"></find-book>
     <!-- 图书渲染表格 -->
@@ -27,7 +27,9 @@
     <!-- 新增图书 -->
     <add-book @add="addBookFn"></add-book>
     <!-- 图书详情 -->
-    <detail-book :book="detail"></detail-book>
+    <div class="mask" v-if="isShow" >
+      <detail-book :book="detail" @closeDetail="closeDetailFn"></detail-book>
+    </div>
 
   </div>
 </template>
@@ -43,6 +45,7 @@ export default {
     return {
       list: [],
       detail:{},
+      isShow:false,
     };
   },
   components: {
@@ -92,7 +95,10 @@ export default {
     },
     aboutFn(list){
       this.detail=list
-
+      this.isShow=true
+    },
+    closeDetailFn(val){
+      this.isShow=val
     }
   },
 };
