@@ -8,7 +8,9 @@
     <!-- <MyTable></MyTable> -->
 
     <!-- 作业-手机注册邮箱注册 -->
-    <MyRegister></MyRegister>
+    <!-- <MyRegister></MyRegister> -->
+    <!-- 作业-数据渲染成表单 -->
+    <MyTableVue></MyTableVue>
 
   </div>
 </template>
@@ -18,12 +20,14 @@ import Dynamic from './CaseTest/01_UseDynamic.vue'
 import Slot from './CaseTest/02_UseSlot.vue'
 import MyTable from './CaseTest/03_UseTable.vue'
 import MyRegister from './MyRegister.vue'
+import MyTableVue from './MyTable.vue'
 export default {
   components:{
     Dynamic,
     Slot,
     MyTable,
     MyRegister,
+    MyTableVue,
   }
 
 }
