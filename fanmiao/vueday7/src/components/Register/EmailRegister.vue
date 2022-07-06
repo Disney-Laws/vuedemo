@@ -7,17 +7,19 @@
       </el-radio-group>
     </el-form-item>
     <el-form-item label="邮箱">
-      <el-input v-model="form.email"></el-input>
+      <slot name="email" :row="form">
+      <el-input v-model="form.email" placeholder="输入邮箱"></el-input>
+      </slot>
     </el-form-item>
 
     <el-form-item label="登录密码">
-      <el-input v-model="form.pwd"></el-input>
+      <el-input v-model="form.pwd" placeholder="密码"></el-input>
     </el-form-item>
     <el-form-item label="再次输入登录密码">
-      <el-input v-model="form.repwd"></el-input>
+      <el-input v-model="form.repwd" placeholder="再次输入密码"></el-input>
     </el-form-item>
-    <el-form-item label="邀请码(选填)">
-      <el-input v-model="form.yqm"></el-input>
+    <el-form-item label="邀请码(选填)" >
+      <el-input v-model="form.yqm" placeholder="输入邀请码"></el-input>
     </el-form-item>
   </el-form>
 </template>

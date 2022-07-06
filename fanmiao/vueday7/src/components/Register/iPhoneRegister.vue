@@ -8,17 +8,17 @@
     </el-form-item>
     <el-form-item label="手机号码">
       <slot name="num" :row="form">
-        <el-input v-model="form.num"></el-input>
+        <el-input v-model="form.num" placeholder="输入手机号"></el-input>
       </slot>
     </el-form-item>
     <el-form-item label="登录密码">
-      <el-input v-model="form.pwd"></el-input>
+      <el-input type="password" v-model="form.pwd" placeholder="输入密码"></el-input>
     </el-form-item>
     <el-form-item label="再次输入登录密码">
-      <el-input v-model="form.repwd"></el-input>
+      <el-input v-model="form.repwd" placeholder="再次输入登录密码"></el-input>
     </el-form-item>
     <el-form-item label="邀请码(选填)">
-      <el-input v-model="form.yqm"></el-input>
+      <el-input v-model="form.yqm" placeholder="输入邀请码"></el-input>
     </el-form-item>
   </el-form>
 </template>

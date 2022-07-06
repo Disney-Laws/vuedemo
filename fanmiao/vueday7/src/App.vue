@@ -8,9 +8,9 @@
     <!-- <MyTable></MyTable> -->
 
     <!-- 作业-手机注册邮箱注册 -->
-    <!-- <MyRegister></MyRegister> -->
+    <MyRegister></MyRegister>
     <!-- 作业-数据渲染成表单 -->
-    <MyTableVue></MyTableVue>
+    <!-- <MyTableVue></MyTableVue> -->
 
   </div>
 </template>

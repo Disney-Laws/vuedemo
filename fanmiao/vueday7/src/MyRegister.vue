@@ -1,12 +1,15 @@
 <template>
   <div id="register">
-    <el-button type="primary" @click="comName='iPhoneRegister'">手机注册</el-button>
-    <el-button @click="comName='EmailRegister'">邮箱注册</el-button>
+    <el-button  @click="comName='iPhoneRegister'">手机注册</el-button>
+    <el-button  @click="comName='EmailRegister'">邮箱注册</el-button>
     <keep-alive>
         <!-- 动态组件 -->
         <component :is="comName">
         <template v-slot:num="scope">
-        <el-input v-model="scope.row.num"></el-input>
+        <el-input v-model="scope.row.num" placeholder="输入手机号"></el-input>
+        </template>
+        <template v-slot:email="scope">
+        <el-input v-model="scope.row.email" placeholder="输入邮箱"></el-input>
         </template>
         </component>
     </keep-alive>
@@ -26,6 +29,7 @@ export default {
   data() {
     return {
         comName:'iPhoneRegister',
+        type:'primary'
     };
   },
   methods: {},
@@ -36,5 +40,8 @@ export default {
 
 #register{
     width: 500px;
+}
+html,body{
+  text-align: center;
 }
 </style>
