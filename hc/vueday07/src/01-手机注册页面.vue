@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-06 20:21:34
  * @LastEditors: sj
- * @LastEditTime: 2022-07-06 20:33:07
+ * @LastEditTime: 2022-07-06 20:21:34
 -->
 <!--
  * @Descripttion: 
@@ -18,15 +18,15 @@
 -->
 <template>
   <div>
-   <MyTable></MyTable>
+   <MyLogin></MyLogin>
   </div>
 </template>
 
 <script>
-import MyTable from './views/02-renderList.vue'
+import MyLogin from './views/01-MyLogin.vue'
 export default {
 components:{
-  MyTable
+  MyLogin
 }
 }
 </script>
