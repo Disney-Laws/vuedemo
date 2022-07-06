@@ -5,7 +5,10 @@
     <!-- 案例2  组件插槽-->
     <!-- <Slot></Slot> -->
     <!-- 案例3 作用域插槽使用场景 -->
-    <MyTable></MyTable>
+    <!-- <MyTable></MyTable> -->
+
+    <!-- 作业-手机注册邮箱注册 -->
+    <MyRegister></MyRegister>
 
   </div>
 </template>
@@ -14,11 +17,13 @@
 import Dynamic from './CaseTest/01_UseDynamic.vue'
 import Slot from './CaseTest/02_UseSlot.vue'
 import MyTable from './CaseTest/03_UseTable.vue'
+import MyRegister from './MyRegister.vue'
 export default {
   components:{
     Dynamic,
     Slot,
     MyTable,
+    MyRegister,
   }
 
 }
