@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-07 19:28:56
  * @LastEditors: sj
- * @LastEditTime: 2022-07-07 20:35:27
+ * @LastEditTime: 2022-07-07 21:11:39
 -->
 <template>
   <div>
@@ -22,6 +22,23 @@
         <td>{{scope.row.goods_name}}</td>
         <td>{{scope.row.goods_price}}</td>
         <td>
+          <input
+          class="tag-input form-control"
+          style="width: 100px;"
+          type="text"
+          v-focus
+          v-model="scope.row.inputValue"
+          v-if="scope.row.inputVisible"
+          @blur="scope.row.inputVisible = false"
+          @keydown.enter="enterFn(scope.row)"
+          @keydown.esc="scope.row.inputValue = ''"
+          />
+              <button 
+          v-else 
+          style="display: block;" 
+          class="btn btn-primary btn-sm add-tag"
+          @click="scope.row.inputVisible = true"
+          >+Tag</button>
              <span
             class="badge badge-warning"
             v-for="(item, index) in scope.row.tags"
@@ -35,7 +52,7 @@
           class="btn btn-danger btn-sm"
           @click="del(scope.row)"
           >删除</button>
-          <button class="btn btn-primary btn-sm">编辑</button>
+          <button class="btn btn-primary btn-sm" v-edit="user">编辑</button>
         </td>
       </template>
     </MyTable>
@@ -50,7 +67,23 @@ export default {
   },
   data(){
     return {
-      list:[]
+      list:[],
+      person:['zs','ls'],
+      user:'zs'
+    }
+  },
+  directives:{
+    edit:{
+      inserted(el,binding,vnode){
+        // console.log(binding.value);
+        console.log(vnode.context);
+        if(vnode.context.person.includes(binding.value)){
+          el.style.display = 'block';
+        }else{
+          el.style.display = 'none';
+        }
+         
+      }
     }
   },
   created(){
@@ -67,6 +100,15 @@ export default {
     del(id){
        const index = this.list.findIndex(ele=>ele.id==id);
        this.list.splice(index, 1);
+    },
+    enterFn(obj){
+      if(obj.inputValue.trim()==''){
+         alert('请输入数据')
+        return
+      }
+      obj.tags.push(obj.inputValue)
+      obj.inputValue=''
+      obj.inputVisible = false
     }
   }
 }

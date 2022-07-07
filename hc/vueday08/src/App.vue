@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-07 19:22:46
  * @LastEditors: sj
- * @LastEditTime: 2022-07-07 20:02:17
+ * @LastEditTime: 2022-07-07 20:51:46
 -->
 <template>
   <div>
@@ -45,8 +45,7 @@ export default {
     }
 ],
  comName: "MyGoodsList"
-  }
- 
+  } 
  },
  components:{
   MyHeader,
