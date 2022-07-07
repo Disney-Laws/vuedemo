@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-07 19:28:12
  * @LastEditors: sj
- * @LastEditTime: 2022-07-07 19:45:39
+ * @LastEditTime: 2022-07-07 19:57:23
 -->
 <template>
   <div class="my-tab-bar">
@@ -13,7 +13,7 @@
     class="tab-item"
     v-for="(item, index) in arr" :key="index"
     :class="{current: currentIndex==index}"
-    @click="currentIndex=index"
+    @click="clickFn(index,item.componentName)"
     >
       <!-- 图标 -->
       <span 
@@ -45,6 +45,13 @@ export default {
         }
       }
     }
+  },
+  methods:{
+    clickFn(index,name){
+      this.currentIndex=index
+      this.$emit('change', name)
+    }
+    
   }
 }
 </script>
