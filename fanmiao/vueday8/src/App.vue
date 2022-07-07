@@ -4,7 +4,10 @@
   <!-- <UseDirective></UseDirective> -->
   <!-- tabbar 案例 -->
   <MyHeader title="tabbar"></MyHeader>
-  <component :is="comName"></component>
+  <!-- 设置上下内边距 -->
+  <div style="margin-top:45px;margin-bottom:50px">
+    <component :is="comName"></component>
+  </div>
   <MyTabBar :arr="tabList" @changeCom="changeComFn"></MyTabBar>
 
   </div>

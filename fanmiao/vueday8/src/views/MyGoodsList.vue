@@ -32,7 +32,9 @@
           @click="scope.row.inputVisible = true"
           >+Tag</button>
 
-          <span v-for="(str, ind) in scope.row.tags" :key="ind"
+          <span style="margin-left:8px"
+          v-for="(str, ind) in scope.row.tags" 
+          :key="ind"
           class="badge badge-warning"
           >
             {{ str }}
@@ -50,8 +52,7 @@
 
 <script>
 import MyTable from "../components/tabbar/MyTable";
-import axios from "axios";
-axios.defaults.baseURL = "https://www.escook.cn";
+
 // 目标: 循环商品列表表格
 // 1. 封装MyTable.vue 整体表格组件-一套标签和样式
 // 2. axios请求数据
@@ -75,17 +76,27 @@ export default {
     };
   },
   created() {
-    axios({
+    // this.$axios({
+    //   url: "/api/goods",
+    // }).then((res) => {
+    //   console.log(res);
+    //   this.list = res.data.data;
+    // });
+    this.getList()
+  },
+  methods: {
+    getList(){
+      this.$axios({
       url: "/api/goods",
     }).then((res) => {
       console.log(res);
       this.list = res.data.data;
     });
-  },
-  methods: {
+    },
     removeBtn(id){
       let index = this.list.findIndex(obj => obj.id === id)
       this.list.splice(index, 1)
+      // this.getList()
     },
     enterFn(obj){ // 回车
       // console.log(obj.inputValue);
@@ -93,7 +104,6 @@ export default {
         alert('请输入数据')
         return
       }
-
       obj.tags.push(obj.inputValue) // 表单里的字符串状态tags数组
       obj.inputValue = ""
     }
