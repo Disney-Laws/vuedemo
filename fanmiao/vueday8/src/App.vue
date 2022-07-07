@@ -4,8 +4,8 @@
   <!-- <UseDirective></UseDirective> -->
   <!-- tabbar 案例 -->
   <MyHeader title="tabbar"></MyHeader>
-  <MyTable></MyTable>
-  <MyTabBar :arr="tabList"></MyTabBar>
+  <component :is="comName"></component>
+  <MyTabBar :arr="tabList" @changeCom="changeComFn"></MyTabBar>
 
   </div>
 </template>
@@ -15,12 +15,15 @@
 import UseDirective from './components/UseDirective.vue'
 import MyHeader from './components/tabbar/MyHeader.vue'
 import MyTabBar from './components/tabbar/MyTabBar.vue'
-import MyTable from './components/tabbar/MyTable.vue'
+
+import MyGoodsList from './views/MyGoodsList.vue'
+import MyGoodsSearch from './views/MyGoodsSearch.vue'
+import MyUserInfo from './views/MyUserInfo.vue'
 
 export default {
   data(){
     return{
-
+      comName:'MyGoodsList',
       tabList: [
       {
           iconText: "icon-shangpinliebiao",
@@ -44,8 +47,15 @@ export default {
     UseDirective,
     MyHeader,
     MyTabBar,
-    MyTable,
+    MyGoodsList,
+    MyGoodsSearch,
+    MyUserInfo,
 
+  },
+  methods:{
+    changeComFn(val){
+      this.comName=val
+    }
   }
 }
 </script>

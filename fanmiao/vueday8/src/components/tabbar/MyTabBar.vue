@@ -2,10 +2,10 @@
   <div class="my-tab-bar">
     <div
       class="tab-item"
-      v-for="(obj, index) in arr"
-      :key="index"
-      @click="btn(index, obj)"
-      :class="{ current: index === selIndex }"
+      v-for="obj in arr"
+      :key="obj.componentName"
+      @click="btn(obj.componentName)"
+      :class="{ current:currentComponent===obj.componentName}"
     >
       <!-- 图标 -->
       <span class="iconfont" :class="obj.iconText"></span>
@@ -39,13 +39,13 @@ export default {
   },
   data() {
     return {
-      selIndex: 0, // 默认第一个高亮
+      currentComponent:'MyGoodsList', // 默认第一个高亮
     };
   },
   methods: {
-    btn(index, theObj) {
-      this.selIndex = index; // 点谁, 就把谁的索引值保存起来
-      this.$emit("changeCom", theObj.componentName); // 要切换的组件名传App.vue
+    btn(val) {
+      this.currentComponent=val; // 点谁, 就把谁的索引值保存起来
+      this.$emit("changeCom", val); // 要切换的组件名传App.vue
     },
   },
 };
@@ -67,6 +67,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
   }
 }
 
