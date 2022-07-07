@@ -23,7 +23,7 @@
           <td>
             <!-- {{item.headImgUrl}} -->
             <!-- <img :src="item.headImgUrl" alt=""> -->
-            <slot name="imgage" :img="item.headImgUrl"></slot>
+            <slot name="imgage" :img="item"></slot>
           </td>
         </tr>
       </thead>
