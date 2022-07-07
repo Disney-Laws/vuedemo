@@ -5,7 +5,7 @@
  * @email: 1373842098@qq.com
  * @Date: 2022-07-07 19:28:56
  * @LastEditors: sj
- * @LastEditTime: 2022-07-07 20:24:24
+ * @LastEditTime: 2022-07-07 20:35:27
 -->
 <template>
   <div>
@@ -31,7 +31,10 @@
           >
         </td>
         <td>
-          <button class="btn btn-danger btn-sm">删除</button>
+          <button 
+          class="btn btn-danger btn-sm"
+          @click="del(scope.row)"
+          >删除</button>
           <button class="btn btn-primary btn-sm">编辑</button>
         </td>
       </template>
@@ -60,6 +63,10 @@ export default {
       }).then(res=>{
         console.log(res.data.data);
         this.list = res.data.data})
+    },
+    del(id){
+       const index = this.list.findIndex(ele=>ele.id==id);
+       this.list.splice(index, 1);
     }
   }
 }
