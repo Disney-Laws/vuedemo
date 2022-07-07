@@ -15,43 +15,59 @@
         <td>{{ scope.row.goods_price }}</td>
         <td>
           <input
-          class="tag-input form-control"
-          style="width: 100px;"
-          type="text"
-          v-if="scope.row.inputVisible"
-          v-focus
-          @blur="scope.row.inputVisible = false"
-          @keydown.enter="enterFn(scope.row)"
-          v-model="scope.row.inputValue"
-          @keydown.esc="scope.row.inputValue = ''"
+            class="tag-input form-control"
+            style="width: 100px"
+            type="text"
+            v-if="scope.row.inputVisible"
+            v-focus
+            @blur="scope.row.inputVisible = false"
+            @keydown.enter="enterFn(scope.row)"
+            v-model="scope.row.inputValue"
+            @keydown.esc="scope.row.inputValue = ''"
           />
-          <button 
-          v-else 
-          style="display: block;" 
-          class="btn btn-primary btn-sm add-tag"
-          @click="scope.row.inputVisible = true"
-          >+Tag</button>
+          <button
+            v-else
+            style="display: block"
+            class="btn btn-primary btn-sm add-tag"
+            @click="scope.row.inputVisible = true"
+          >
+            +Tag
+          </button>
 
-          <span style="margin-left:8px"
-          v-for="(str, ind) in scope.row.tags" 
-          :key="ind"
-          class="badge badge-warning"
+          <span
+            style="margin-left: 8px"
+            v-for="(str, ind) in scope.row.tags"
+            :key="ind"
+            class="badge badge-warning"
           >
             {{ str }}
           </span>
         </td>
-        <td>
-          <button class="btn btn-danger btn-sm"
-          @click="removeBtn(scope.row.id)"
-          >删除</button>
-        </td>
       </template>
+      <template #btn="scope">
+        <td>
+          <button
+            class="btn btn-danger btn-sm"
+            @click="removeBtn(scope.row.id)"
+            v-userDel="user"
+          >
+            删除
+          </button>
+          <button 
+          style="margin-left: 8px" 
+          class="btn btn-primary btn-sm"
+          v-userEdit="userId"
+          >
+            编辑
+          </button>
+        </td></template
+      >
     </MyTable>
   </div>
 </template>
 
 <script>
-import MyTable from "../components/tabbar/MyTable";
+import MyTable from '../components/tabbar/MyTable';
 
 // 目标: 循环商品列表表格
 // 1. 封装MyTable.vue 整体表格组件-一套标签和样式
@@ -72,8 +88,33 @@ export default {
   },
   data() {
     return {
-      list: [] // 所有数据
+      user:1,  // 1管理员,0普通用户 判断删除按钮显示隐藏
+
+      userId:'admin', //数组方式判断身份控制编辑按钮显示隐藏
+      userArr:['admin','admin1','admin11'],
+
+      list: [], // 所有数据
     };
+  },
+  directives:{
+    userDel:{
+      inserted(el,binding){
+        // console.log(binding.value);
+        if(binding.value!==1){
+          el.style.display='none'
+        }
+      }
+    },
+    userEdit:{
+      inserted(el,binding,vNode){
+        // console.log(vNode);
+        if(!vNode.context.userArr.includes(binding.value)){
+          el.style.display='none'
+        }
+        
+      }
+
+    }
   },
   created() {
     // this.$axios({
@@ -82,34 +123,34 @@ export default {
     //   console.log(res);
     //   this.list = res.data.data;
     // });
-    this.getList()
+    this.getList();
   },
   methods: {
-    getList(){
+    getList() {
       this.$axios({
-      url: "/api/goods",
-    }).then((res) => {
-      console.log(res);
-      this.list = res.data.data;
-    });
+        url: '/api/goods',
+      }).then((res) => {
+        console.log(res);
+        this.list = res.data.data;
+      });
     },
-    removeBtn(id){
-      let index = this.list.findIndex(obj => obj.id === id)
-      this.list.splice(index, 1)
+    removeBtn(id) {
+      let index = this.list.findIndex((obj) => obj.id === id);
+      this.list.splice(index, 1);
       // this.getList()
     },
-    enterFn(obj){ // 回车
+    enterFn(obj) {
+      // 回车
       // console.log(obj.inputValue);
       if (obj.inputValue.trim().length === 0) {
-        alert('请输入数据')
-        return
+        alert('请输入数据');
+        return;
       }
-      obj.tags.push(obj.inputValue) // 表单里的字符串状态tags数组
-      obj.inputValue = ""
-    }
-  }
+      obj.tags.push(obj.inputValue); // 表单里的字符串状态tags数组
+      obj.inputValue = '';
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

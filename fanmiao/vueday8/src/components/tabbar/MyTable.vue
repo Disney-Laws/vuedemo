@@ -24,6 +24,7 @@
             <button class="btn btn-danger btn-sm">删除</button>
         </td> -->
         <slot name="body" :row="obj"></slot>
+        <slot name="btn" :row="obj"></slot>
       </tr>
     </tbody>
   </table>
