@@ -8,7 +8,9 @@
     <div class="main">
       <component :is="comName"></component>
     </div>
-    <MyTabBar :arr="tabList" @changeCom="changeComFn"></MyTabBar>
+    <MyTabBar :list="tabList"
+    @changeCom="changeComFn"
+    ></MyTabBar>
   </div>
 </template>
 
@@ -21,7 +23,7 @@ import MyHeader from "./components/MyHeader";
 // 4. 使用MyTabBar组件, 传入数据(父->子), 循环产生底部导航
 // 5. 子组件内props自定义检验规则(2-5项)
 // 6. 子组件内循环产生底部导航
-import MyTabBar from "./components/MyTabBar";
+import MyTabBar from './components/MyTabBar'
 
 // 目标: 切换组件显示
 // 1. 创建组件 - 编写内容
@@ -31,15 +33,14 @@ import MyTabBar from "./components/MyTabBar";
 // 5. 底部导航点击- MyTabBar.vue里
 // 子 -> 父技术 (传要切换的组件名出来)
 
-import MyGoodsList from "./views/MyGoodsList";
-import MyGoodsSearch from "./views/MyGoodsSearch";
-import MyUserInfo from "./views/MyUserInfo";
+import MyGoodsList from './views/MyGoodsList'
+import MyGoodsSearch from './views/MyGoodsSearch'
+import MyUserInfo from './views/MyUserInfo'
 export default {
   data() {
     return {
       comName: "MyGoodsList", // 默认显示的组件
-      tabList: [
-        // 底部导航的数据
+      tabList: [ // 底部导航的数据
         {
           iconText: "icon-shangpinliebiao",
           text: "商品列表",
@@ -63,19 +64,20 @@ export default {
     MyTabBar,
     MyGoodsList,
     MyGoodsSearch,
-    MyUserInfo,
+    MyUserInfo
   },
   methods: {
-    changeComFn(cName) {
+    changeComFn(cName){
+      
       this.comName = cName; // MyTabBar里选出来的组件名赋予给is属性的comName
       // 导致组件的切换
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-.main {
+.main{
   padding-top: 45px;
   padding-bottom: 51px;
 }
