@@ -50,21 +50,9 @@
 
 <script>
 import MyTable from "../components/MyTable";
-// import axios from "axios";
-// axios.defaults.baseURL = "https://www.escook.cn";
-// 目标: 循环商品列表表格
-// 1. 封装MyTable.vue 整体表格组件-一套标签和样式
-// 2. axios请求数据
-// 3. 传入MyTable组件里循环tr显示数据
+import axios from "axios";
+axios.defaults.baseURL = "https://www.escook.cn";
 
-// 目标: 展示tags标签
-// 1. tags数组 - 某个td循环span使用文字
-// 2. span设置bs的样式
-
-// 目标: 删除数据
-// 1. 删除按钮 - 点击事件
-// 2. 通过作用域插槽拿到id, 实现点击事件方法
-// 3. 通过id查找数组里数据, 找到索引
 export default {
   components: {
     MyTable,
@@ -75,7 +63,7 @@ export default {
     };
   },
   created() {
-    $axios({
+    axios({
       url: "/api/goods",
     }).then((res) => {
       console.log(res);
