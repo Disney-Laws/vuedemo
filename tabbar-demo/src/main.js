@@ -7,6 +7,15 @@ import "./assets/fonts/iconfont.css";
 // axios.defaults.baseURL = "http://www.escook.cn";
 // Vue.prototype.$axios = axios;
 
+Vue.directive("focus", {
+  inserted(el) {
+    el.focus();
+  },
+  update(el) {
+    el.focus();
+  },
+});
+
 Vue.config.productionTip = false;
 
 new Vue({
