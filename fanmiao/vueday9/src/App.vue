@@ -1,42 +1,50 @@
 <template>
   <div>
     <div class="footer_wrap">
-      <a  @click="btn('/find','Find')">发现音乐</a>
+      <!-- <a  @click="btn('/find','Find')">发现音乐</a>
       <a  @click="btn('/my','My')">我的音乐</a>
-      <a  @click="btn('/part','Part')">朋友</a>
+      <a  @click="btn('/part','Part')">朋友</a> -->
       <!-- 声明式导航 -->
-      <!-- <router-link to="/find">发现音乐</router-link>
-      跳转传参
-      <router-link to="/my/222">我的音乐</router-link>
-      <router-link to="/part?name=aaa">朋友</router-link> -->
-
+      <router-link to="/find">发现音乐</router-link>
+      <!-- 跳转传参 -->
+      <!-- <router-link to="/my/222">我的音乐</router-link> -->
+      <router-link to="/my">我的音乐</router-link>
+      <router-link to="/part?name=aaa">朋友</router-link>
     </div>
     <div class="top">
       <!-- 7、设置挂载点 -->
       <router-view></router-view>
-      
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  methods:{
-    btn(path,name){
+  methods: {
+    btn(path, name) {
       this.$router.push({
         path,
         // name,
-        query:{
-          name:"aaa"
+        query: {
+          name: 'aaa',
         },
-        params:{
-          username:'abc'
-        }
-      })
-    }
-  }
-
-
+        params: {
+          username: 'abc',
+        },
+      });
+    },
+  },
+  created() {
+    const isLogin = true; // 登录状态(未登录)
+    this.$router.beforeEach((to, from, next) => {
+      if (to.path === '/my' && !isLogin) {
+        alert('请登录');
+        next(false); // 阻止路由跳转
+      } else {
+        next(); // 正常放行
+      }
+    });
+  },
 };
 </script>
 
@@ -66,7 +74,7 @@ export default {
 .top {
   padding-top: 62px;
 }
-.footer_wrap .router-link-active{
+.footer_wrap .router-link-active {
   color: white;
   background: black;
 }
