@@ -4,6 +4,8 @@ import App from './App.vue';
 import Find from '@/views/Find.vue'
 import My from '@/views/My.vue';
 import Part from '@/views/Part.vue';
+// 引入404页面
+import NotFound from '@/views/NotFound.vue'
 
 // 1、下载路由
 // 2、引入路由
@@ -24,10 +26,22 @@ const routes = [
     path: '/part',
     component: Part,
   },
+  // 导航重定向
+  {
+    path:'/',
+    redirect: '/find',
+  },
+  {
+    path:'*',
+    component:NotFound,
+  }
+
 ];
 // 5、创建路由
 const router = new VueRouter({
   routes,
+  // 路由在地址栏的模式
+  // mode:'history',
 })
 
 Vue.config.productionTip = false;
