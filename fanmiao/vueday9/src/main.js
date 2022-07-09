@@ -6,6 +6,11 @@ import My from '@/views/My.vue';
 import Part from '@/views/Part.vue';
 // 引入404页面
 import NotFound from '@/views/NotFound.vue'
+// 引入二级嵌套页面
+import Ranking from '@/views/Second/Ranking.vue'
+import Recommend from '@/views/Second/Recommend.vue';
+import SongList from '@/views/Second/SongList.vue';
+
 
 // 1、下载路由
 // 2、引入路由
@@ -18,6 +23,20 @@ const routes = [
     path: '/find',
     name: 'Find', //给路由起名字
     component: Find,
+    children: [
+      {
+        path: 'ranking',
+        component: Ranking,
+      },
+      {
+        path: 'recommend',
+        component: Recommend,
+      },
+      {
+        path: 'songlist',
+        component: SongList,
+      },
+    ],
   },
   {
     path: '/my',
