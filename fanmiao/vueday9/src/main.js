@@ -16,26 +16,28 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/find',
+    name: 'Find', //给路由起名字
     component: Find,
   },
   {
-    path: '/my/:username',
+    path: '/my',
+    name: 'My',
     component: My,
   },
   {
     path: '/part',
+    name: 'Part',
     component: Part,
   },
   // 导航重定向
   {
-    path:'/',
+    path: '/',
     redirect: '/find',
   },
   {
-    path:'*',
-    component:NotFound,
-  }
-
+    path: '*',
+    component: NotFound,
+  },
 ];
 // 5、创建路由
 const router = new VueRouter({

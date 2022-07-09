@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="footer_wrap">
-      <!-- <a href="#/find">发现音乐</a>
-      <a href="#/my">我的音乐</a>
-      <a href="#/part">朋友</a> -->
+      <a  @click="btn('/find','Find')">发现音乐</a>
+      <a  @click="btn('/my','My')">我的音乐</a>
+      <a  @click="btn('/part','Part')">朋友</a>
       <!-- 声明式导航 -->
-      <router-link to="/find">发现音乐</router-link>
-      <!-- 跳转传参 -->
+      <!-- <router-link to="/find">发现音乐</router-link>
+      跳转传参
       <router-link to="/my/222">我的音乐</router-link>
-      <router-link to="/part?name=aaa">朋友</router-link>
+      <router-link to="/part?name=aaa">朋友</router-link> -->
 
     </div>
     <div class="top">
@@ -21,6 +21,21 @@
 
 <script>
 export default {
+  methods:{
+    btn(path,name){
+      this.$router.push({
+        path,
+        // name,
+        query:{
+          name:"aaa"
+        },
+        params:{
+          username:'abc'
+        }
+      })
+    }
+  }
+
 
 };
 </script>
