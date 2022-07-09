@@ -17,7 +17,7 @@ const routes = [
     component: Find,
   },
   {
-    path: '/my',
+    path: '/my/:username',
     component: My,
   },
   {
