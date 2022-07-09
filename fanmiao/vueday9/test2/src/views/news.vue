@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>新闻</p>
+    <p>我是新闻</p>
   </div>
 </template>
 
