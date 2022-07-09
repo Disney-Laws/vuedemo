@@ -1,9 +1,13 @@
 <template>
   <div>
-    <router-link>首页</router-link> &nbsp;
-    <router-link>分类</router-link> &nbsp;
-    <router-link>订单</router-link> &nbsp;
-    <router-link>我的</router-link> &nbsp;
+    <router-link to="/home">首页</router-link> &nbsp;
+    <router-link to="/class">分类</router-link> &nbsp;
+    <router-link to="/oders">订单</router-link> &nbsp;
+    <router-link to="/mine">我的</router-link> &nbsp;
+
+    <div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
