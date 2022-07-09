@@ -7,6 +7,7 @@ import NotFound from "@/views/NotFound";
 import Recommend from "@/views/Second/Recommend";
 import Ranking from "@/views/Second/Ranking";
 import SongList from "@/views/Second/SongList";
+import San from "@/views/Second/san/san";
 import VueRouter from "vue-router";
 
 let routerPush = VueRouter.prototype.push;
@@ -27,7 +28,11 @@ const routes = [
     children: [
       { path: "ranking", component: Ranking },
       { path: "recommend", component: Recommend },
-      { path: "songList", component: SongList },
+      {
+        path: "songList",
+        component: SongList,
+        children: [{ path: "San", component: San }],
+      },
     ],
   },
   { path: "/my", component: My, name: "My" },
