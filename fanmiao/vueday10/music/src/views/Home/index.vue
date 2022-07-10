@@ -3,21 +3,44 @@
     <van-cell-group>
       <van-cell title="推荐歌单" />
       <van-grid :column-num="3">
-        <van-grid-item
+        <!-- <van-grid-item
           v-for="value in 6"
           :key="value"
           icon="photo-o"
           text="文字"
-        />
+        /> -->
+        <van-grid-item v-for="item in list" :key="item.id">
+          <van-image width="100" height="100"  :src="item.picUrl" />
+          <p class="song_name">{{item.name}}</p>
+        </van-grid-item>
       </van-grid>
     </van-cell-group>
   </div>
 </template>
 
 <script>
+import {recommendMusicApi} from '@/api/Home'
 export default {
+  data(){
+    return{
+      list:[],
+    }
+  },
+  created(){
+    this.getList()
 
-}
+  },
+  methods:{
+    async getList(){
+       const res = await recommendMusicApi({
+        limit:6,
+      })
+      console.log(res.data.result);
+      this.list = res.data.result
+
+    },
+  }
+};
 </script>
 
 <style>

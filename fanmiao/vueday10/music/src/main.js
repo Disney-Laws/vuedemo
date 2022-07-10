@@ -11,7 +11,7 @@ Vue.use(Vant);
 import {recommendMusicApi} from '@/api/Home'
 async function fn(){
   const res = await recommendMusicApi()
-  console.log(res);
+  // console.log(res);
 }
 fn()
 
