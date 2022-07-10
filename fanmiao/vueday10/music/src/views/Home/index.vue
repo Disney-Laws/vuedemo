@@ -1,6 +1,16 @@
 <template>
   <div>
-
+    <van-cell-group>
+      <van-cell title="推荐歌单" />
+      <van-grid :column-num="3">
+        <van-grid-item
+          v-for="value in 6"
+          :key="value"
+          icon="photo-o"
+          text="文字"
+        />
+      </van-grid>
+    </van-cell-group>
   </div>
 </template>
 
