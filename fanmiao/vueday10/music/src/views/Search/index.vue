@@ -1,6 +1,11 @@
 <template>
   <div>
-    <van-search v-model="value" shape="round" placeholder="请输入搜索关键词" />
+    <van-search
+      v-model="value"
+      shape="round"
+      placeholder="请输入搜索关键词"
+      @input="inputFn"
+    />
     <!-- 热门搜索 -->
     <template v-if="resultList.length === 0">
       <!-- 搜索下容器 -->
@@ -57,7 +62,9 @@ export default {
       hotArr: [],
       resultList: [],
       loading: false,
-      finished: true,
+      finished: false,
+      page: 1,
+      timer: '',
     };
   },
   async mounted() {
@@ -77,8 +84,9 @@ export default {
     async getResult() {
       try {
         const res = await searchResultApi({
-          keywords:this.value,
+          keywords: this.value,
           limit: 5,
+          offset: (this.page - 1) * 5,
         });
         console.log(res.data.result.songs);
         this.resultList = res.data.result.songs;
@@ -86,8 +94,43 @@ export default {
         console.log('获取最佳匹配失败');
       }
     },
-    onLoad() {
+    async onLoad() {
+      if (this.resultList.length >= 10) {
+        this.finished = true;
+        return;
+      }
+      try {
+        const res = await searchResultApi({
+          keywords: this.value,
+          limit: 5,
+          offset: (this.page - 1) * 5,
+        });
+        console.log(res.data.result.songs);
+        this.loading = false;
+        if (res.data.result.songs) {
+          this.resultList.push(...res.data.result.songs);
+          this.page++;
+        } else {
+          this.finished = true;
+        }
+      } catch (e) {
+        console.log('获取更多失败');
+      }
+    },
+    inputFn() {
+      if (this.timer) clearTimeout(this.timer);
+      this.timer = setTimeout(async () => {
+        this.finished = false; // 输入框关键字改变-可能有新数据(不一定加载完成了)
+        // 输入框值改变
+        if (this.value.length === 0) {
+          // 搜索关键词如果没有, 就把搜索结果清空阻止网络请求发送(提前return)
+          this.resultList = [];
+          return;
+        }
+        this.getResult();
 
+        this.loading = false;
+      }, 900);
     },
   },
 };
