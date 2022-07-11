@@ -36,7 +36,14 @@
           finished-text="没有更多了"
           @load="onLoad"
         >
-          <van-cell
+          <SongItem
+            v-for="(item,index) in resultList"
+            :key="index"
+            :name="item.name"
+            :author="item.ar[0].name"
+            :id="item.al.id"
+          ></SongItem>
+          <!-- <van-cell
             center
             v-for="item in resultList"
             :key="item.al.id"
@@ -46,7 +53,7 @@
             <template #right-icon>
               <van-icon name="play-circle-o" />
             </template>
-          </van-cell>
+          </van-cell> -->
         </van-list>
       </van-cell-group>
     </template>
@@ -55,7 +62,11 @@
 
 <script>
 import { hotSearchApi, searchResultApi } from '@/api/Search';
+import SongItem from '@/components/SongItem.vue';
 export default {
+  components:{
+    SongItem,
+  },
   data() {
     return {
       value: '',
@@ -78,8 +89,11 @@ export default {
   },
   methods: {
     btn(val) {
+      this.page = 1; // 点击重新获取第一页数据
+      this.finished = false; // 点击新关键词-可能有新的数据
       this.value = val;
       this.getResult(val);
+      this.loading = false; // 本次数据加载完毕-才能让list加载更多
     },
     async getResult() {
       try {

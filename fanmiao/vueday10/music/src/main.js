@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
+
+import "@/styles/reset.css"
+import "@/mobile/flexible.js"
+
 // 引入路由对象
 import router from '@/router'
 

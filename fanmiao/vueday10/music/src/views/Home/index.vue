@@ -12,53 +12,65 @@
 
     <van-cell-group>
       <van-cell title="最新音乐" />
-      <van-cell 
+      <SongItem
+      v-for="item in newList" :key="item.id"
+      :name="item.name"
+      :author="item.song.artists[0].name"
+      :id="item.id"
+      >
+
+      </SongItem>
+      <!-- <van-cell 
       center 
       v-for="item in newList" :key="item.id"
       :title="item.name" :label="item.song.artists[0].name+ ' - ' +item.name">
         <template #right-icon>
           <van-icon name="play-circle-o" />
         </template>
-      </van-cell>
+      </van-cell> -->
     </van-cell-group>
   </div>
 </template>
 
 <script>
 import { recommendMusicApi, newMusicApi } from '@/api/Home';
+import SongItem from '@/components/SongItem.vue';
 export default {
-  data() {
-    return {
-      list: [],
-      newList: [],
-    };
-  },
-  created() {
-    this.getList();
-    this.getnewlist();
-  },
-  methods: {
-    async getList() {
-      try {
-        const res = await recommendMusicApi({
-          limit: 6,
-        });
-        // console.log(res.data.result);
-        this.list = res.data.result;
-      } catch (e) {
-        console.log('获取推荐歌单失败');
-      }
+    data() {
+        return {
+            list: [],
+            newList: [],
+        };
     },
-    async getnewlist() {
-      try {
-        const res = await newMusicApi();
-        console.log(res.data.result);
-        this.newList = res.data.result;
-      } catch (e) {
-        console.log('获取最新音乐失败');
-      }
+    created() {
+        this.getList();
+        this.getnewlist();
     },
-  },
+    methods: {
+        async getList() {
+            try {
+                const res = await recommendMusicApi({
+                    limit: 6,
+                });
+                // console.log(res.data.result);
+                this.list = res.data.result;
+            }
+            catch (e) {
+                console.log("获取推荐歌单失败");
+            }
+        },
+        async getnewlist() {
+            try {
+                const res = await newMusicApi();
+                console.log(res.data.result);
+                this.newList = res.data.result;
+            }
+            catch (e) {
+                console.log("获取最新音乐失败");
+            }
+        },
+    },
+    components: { SongItem }
 };
 </script>
 
